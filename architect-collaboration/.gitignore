@@ -1,0 +1,43 @@
+# Local configuration files
+.claude/*.local.md
+.claude/*local.md
+
+# Generated documentation
+docs/generated/
+output/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+logs/
+
+# Node.js (if using any JS tools)
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+# Python ( tools)
+__if using any Pythonyarn-error.log*
+
+pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+venv/
+env/
+ENV/
+
+# Temporary files
+tmp/
+temp/
+.tmp/

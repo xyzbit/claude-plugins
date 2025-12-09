@@ -1,0 +1,17 @@
+{
+  "name": "architect-collaboration",
+  "version": "0.1.0",
+  "description": "Senior Architect Collaboration workflow plugin providing structured guidance through 4-phase development process: Requirements Analysis, Technical Design, Task Breakdown, and Feature Development",
+  "author": {
+    "name": "Claude Code Plugin Team",
+    "email": "plugins@anthropic.com"
+  },
+  "keywords": ["architecture", "workflow", "requirements", "technical-design", "task-management", "collaboration"],
+  "categories": ["project-management", "development", "architecture"],
+  "homepage": "https://github.com/anthropics/claude-plugins",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/anthropics/claude-plugins/tree/master/architect-collaboration"
+  },
+  "license": "MIT"
+}
