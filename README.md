@@ -48,6 +48,8 @@
 
 欢迎贡献新的 Plugin 或改进现有 Plugin！
 
+推荐安装：[Plugin Dev](https://github.com/anthropics/claude-code/tree/main/plugins/plugin-dev) 插件，用于快速开发和调试 Plugin。
+
 ### 贡献指南
 
 1. Fork 本仓库
