@@ -1,0 +1,43 @@
+{
+    "rss-reader-server": {
+      "command": "npx",
+      "args": ["-y", "@iflow-mcp/rss-reader-server@0.1.0"]
+    },
+    "minimax-mcp": {
+      "command": "uvx",
+      "args": ["--from", "iflow-mcp_minimax-mcp", "minimax-mcp"],
+      "env": {
+        "MINIMAX_API_KEY": "${MINIMAX_API_KEY}",
+        "MINIMAX_API_HOST": "${MINIMAX_API_HOST}"
+      }
+    },
+    "wenyan-mcp": {
+      "command": "npx",
+      "args": ["-y", "@iflow-mcp/wenyan-mcp@0.1.0"],
+      "env": {
+        "WECHAT_APP_ID": "${WECHAT_APP_ID}",
+        "WECHAT_APP_SECRET": "${WECHAT_APP_SECRET}"
+      }
+    },
+    "playwright": {
+      "command": "npx",
+      "args": ["@playwright/mcp@latest"]
+    },
+    "redbook-search-comment-mcp": {
+      "command": "uvx",
+      "args": ["--from", "iflow-mcp_redbook-search-comment-mcp", "redbook-search-comment-mcp"]
+    },
+    "lark-mcp": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "@larksuiteoapi/lark-mcp",
+        "mcp",
+        "-a",
+        "${LARK_APP_ID}",
+        "-s",
+        "${LARK_APP_SECRET}",
+        "--oauth"
+      ]
+    }
+}

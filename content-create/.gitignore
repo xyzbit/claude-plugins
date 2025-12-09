@@ -1,0 +1,18 @@
+# User configuration files (may contain API keys)
+.claude/*.local.md
+
+# macOS
+.DS_Store
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# Logs
+*.log
+
+# Temporary files
+*.tmp
+.tmp/

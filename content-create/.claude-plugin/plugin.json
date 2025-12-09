@@ -1,0 +1,18 @@
+{
+  "name": "content-create",
+  "version": "1.0.0",
+  "description": "智能内容创作工作流插件，支持从热点收集到多平台发布的一站式自动化流程",
+  "author": {
+    "name": "xiaoyan",
+    "email": "1425895909@qq.com"
+  },
+  "keywords": [
+    "content-creation",
+    "automation",
+    "wechat",
+    "xiaohongshu",
+    "rss",
+    "workflow"
+  ],
+  "license": "MIT"
+}
