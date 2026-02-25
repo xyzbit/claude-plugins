@@ -1,5 +1,5 @@
 {
-  "name": "claude-plugins",
+  "name": "xyzbit-plugins",
   "owner": {
     "name": "xyzbit",
     "email": "1425895909@qq.com"
@@ -53,8 +53,8 @@
       "description": "高级架构师协作工作流插件，通过需求分析、技术设计、任务分解、功能开发四阶段结构化引导开发流程",
       "version": "0.1.0",
       "author": {
-        "name": "Claude Code Plugin Team",
-        "email": "plugins@anthropic.com"
+        "name": "xyzbit",
+        "email": "1425895909@qq.com"
       },
       "keywords": [
         "architecture",
