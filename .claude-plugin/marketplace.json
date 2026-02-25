@@ -29,6 +29,43 @@
       ],
       "category": "内容创作",
       "license": "MIT"
+    },
+    {
+      "name": "long-running-agent",
+      "source": "./long-running-agent",
+      "description": "基于 Anthropic 论文的双轨 Agent 系统，用于指导 AI Agent 进行增量开发",
+      "version": "1.0.0",
+      "author": {
+        "name": "Long Running Agent Team"
+      },
+      "keywords": [
+        "agent",
+        "development",
+        "harness",
+        "coding-assistant"
+      ],
+      "category": "编码开发",
+      "license": "MIT"
+    },
+    {
+      "name": "architect-collaboration",
+      "source": "./architect-collaboration",
+      "description": "高级架构师协作工作流插件，通过需求分析、技术设计、任务分解、功能开发四阶段结构化引导开发流程",
+      "version": "0.1.0",
+      "author": {
+        "name": "Claude Code Plugin Team",
+        "email": "plugins@anthropic.com"
+      },
+      "keywords": [
+        "architecture",
+        "workflow",
+        "requirements",
+        "technical-design",
+        "task-management",
+        "collaboration"
+      ],
+      "category": "项目管理",
+      "license": "MIT"
     }
   ]
 }
