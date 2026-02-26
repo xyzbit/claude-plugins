@@ -75,6 +75,7 @@ done
 # ── 路径设置 ──────────────────────────────────────────────────────────────────
 mkdir -p "$PROJECT_DIR"
 PROJECT_DIR="$(realpath "$PROJECT_DIR")"
+cd "${PROJECT_DIR}"
 
 # ── 信号处理 ──────────────────────────────────────────────────────────────────
 handle_interrupt() {
@@ -115,8 +116,7 @@ main() {
 
     local log_file="${PROJECT_DIR}/.agent.log"
     echo "${user_message}" | claude --print --verbose \
-      --permission-mode bypassPermissions \
-      --add-dir "${PROJECT_DIR}" 2>&1 | tee -a "${log_file}"
+      --permission-mode bypassPermissions 2>&1 | tee -a "${log_file}"
     # PIPESTATUS[0] 是 claude 的退出码，tee 不影响判断
     [[ "${PIPESTATUS[0]}" -ne 0 ]] && warn "本次迭代遇到错误，继续下一轮..."
 

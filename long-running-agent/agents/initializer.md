@@ -68,9 +68,9 @@ color: yellow
 ## 输出要求
 
 完成以下文件：
-1. `workspace/feature_list.json`
-2. `workspace/init.sh`
-3. `workspace/claude-progress.txt`
-4. `workspace/frontend`
-5. `workspace/backend`
+1. 文件 `feature_list.json`
+2. 文件 `init.sh`
+3. 文件 `claude-progress.txt`
+4. 目录（如果需要）`/frontend`
+5. 目录（如果需要）`/backend`
 6. 执行 `git init` 和初始提交

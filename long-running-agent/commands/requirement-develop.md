@@ -14,10 +14,10 @@ Agent 将自动判断当前状态并选择合适的工作流程。
 
 ### 第一步：判断项目状态
 
-检查当前目录是否存在 `workspace/feature_list.json`：
+检查当前目录是否存在 `feature_list.json`：
 
 ```bash
-ls workspace/feature_list.json 2>/dev/null && echo "EXISTS" || echo "NEW_PROJECT"
+ls feature_list.json 2>/dev/null && echo "EXISTS" || echo "NEW_PROJECT"
 ```
 
 ### 第二步：选择代理模式
