@@ -37,8 +37,8 @@ ${BOLD}使用方式:${RESET}
 ${BOLD}必填参数:${RESET}
   -d <dir>      项目目录（不存在时自动创建）
 
-${BOLD}可选参数:${RESET}
-  -t <task>     任务描述（新项目时传给 Agent）
+${BOLD}必填参数:${RESET}
+  -t <task>     任务描述
 
   -n <iters>    最大迭代次数（默认: 0 = 无限制）
   -s <secs>     迭代间隔秒数（默认: ${DEFAULT_DELAY}）
@@ -70,6 +70,7 @@ while getopts "d:t:m:n:s:h" opt; do
 done
 
 [[ -z "$PROJECT_DIR" ]] && { error "必须指定 -d <project-dir>"; usage; }
+[[ -z "$TASK" ]] && { error "必须指定 -t <task>"; usage; }
 
 # ── 路径设置 ──────────────────────────────────────────────────────────────────
 mkdir -p "$PROJECT_DIR"
@@ -108,9 +109,7 @@ main() {
     header "── 迭代 #${iteration} ──────────────────────────────────────────────────"
 
     # 构建用户消息
-    local user_message="使用 long-running-agent:start skill 在 ${PROJECT_DIR} 目录中进行开发。"
-    [[ -n "${TASK}" ]] && user_message="${user_message}
-任务描述：${TASK}"
+    local user_message="${TASK}"
 
     echo "─────────────────────────────────────────────────────────────────────"
 

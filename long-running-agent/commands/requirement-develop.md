@@ -24,11 +24,11 @@ ls workspace/feature_list.json 2>/dev/null && echo "EXISTS" || echo "NEW_PROJECT
 
 #### 全新项目（feature_list.json 不存在）
 
-使用 **Initializer Agent** 模式，执行初始化项目。
+使用 **Initializer Agent** 子代理进行初始化项目。
 
 #### 已有项目（feature_list.json 存在）
 
-使用 **Coding Agent** 模式，执行增量开发。
+使用 **Coding Agent** 子代理进行增量开发。
 
 ## 注意事项
 - 所有状态管理、提交、测试均由 Agent 自动完成，无需用户手动执行
