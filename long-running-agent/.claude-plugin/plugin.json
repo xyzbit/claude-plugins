@@ -18,7 +18,6 @@
     "./commands/build/frontend.md",
     "./commands/dev-server/start.md",
     "./commands/dev-server/stop.md",
-    "./commands/init/project.md",
     "./commands/session/commit.md",
     "./commands/session/complete.md",
     "./commands/session/status.md",

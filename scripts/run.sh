@@ -6,7 +6,7 @@
 # 每次迭代调用 claude 并使用 long-running-agent:start-session skill
 #
 # Usage:
-#   ./run.sh -d <project-dir> [-t "任务描述"] [-m <model>] [-n <max-iters>] [-s <delay>]
+#   ./run.sh -d <project-dir> [-t "任务描述"][-n <max-iters>] [-s <delay>]
 #
 # Examples:
 #   ./run.sh -d ./my-project -t "构建一个 Todo 应用，支持增删改查"
@@ -16,7 +16,6 @@
 set -euo pipefail
 
 # ── 常量 ─────────────────────────────────────────────────────────────────────
-DEFAULT_MODEL="claude-sonnet-4-5"
 DEFAULT_DELAY=3
 
 # ── 颜色 ─────────────────────────────────────────────────────────────────────
@@ -40,7 +39,7 @@ ${BOLD}必填参数:${RESET}
 
 ${BOLD}可选参数:${RESET}
   -t <task>     任务描述（新项目时传给 Agent）
-  -m <model>    使用的模型（默认: ${DEFAULT_MODEL}）
+
   -n <iters>    最大迭代次数（默认: 0 = 无限制）
   -s <secs>     迭代间隔秒数（默认: ${DEFAULT_DELAY}）
   -h            显示此帮助
@@ -56,7 +55,6 @@ EOF
 # ── 参数解析 ──────────────────────────────────────────────────────────────────
 PROJECT_DIR=""
 TASK=""
-MODEL="${DEFAULT_MODEL}"
 MAX_ITERATIONS=0
 DELAY="${DEFAULT_DELAY}"
 
@@ -64,7 +62,6 @@ while getopts "d:t:m:n:s:h" opt; do
   case $opt in
     d) PROJECT_DIR="$OPTARG" ;;
     t) TASK="$OPTARG" ;;
-    m) MODEL="$OPTARG" ;;
     n) MAX_ITERATIONS="$OPTARG" ;;
     s) DELAY="$OPTARG" ;;
     h) usage ;;
@@ -94,7 +91,6 @@ main() {
   header "══════════════════════════════════════════════════════"
   echo ""
   log "项目目录 : ${PROJECT_DIR}"
-  log "模型     : ${MODEL}"
   [[ "${MAX_ITERATIONS}" -gt 0 ]] && log "最大迭代 : ${MAX_ITERATIONS}" || log "最大迭代 : 无限制"
   [[ -n "${TASK}" ]] && log "任务描述 : ${TASK}"
   echo ""
@@ -118,11 +114,12 @@ main() {
 
     echo "─────────────────────────────────────────────────────────────────────"
 
-    claude --print \
-      --model "${MODEL}" \
+    local log_file="${PROJECT_DIR}/.agent.log"
+    echo "${user_message}" | claude --print --verbose \
       --permission-mode bypassPermissions \
-      --add-dir "${PROJECT_DIR}" \
-      "${user_message}" || warn "本次迭代遇到错误，继续下一轮..."
+      --add-dir "${PROJECT_DIR}" 2>&1 | tee -a "${log_file}"
+    # PIPESTATUS[0] 是 claude 的退出码，tee 不影响判断
+    [[ "${PIPESTATUS[0]}" -ne 0 ]] && warn "本次迭代遇到错误，继续下一轮..."
 
     echo "─────────────────────────────────────────────────────────────────────"
     success "迭代 #${iteration} 完成"

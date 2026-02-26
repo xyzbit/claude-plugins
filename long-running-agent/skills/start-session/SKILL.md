@@ -1,6 +1,9 @@
 ---
-description: 启动 Long-Running Agent 会话，进行增量开发
-disable-model-invocation: false
+name: "Start Session Skill"
+description: "介绍了 Long-Running Agent 运行流程和核心原则, Agent 需要通过遵循这些原则来完成开发任务"
+triggers:
+  - "run long task"
+  - "start long task"
 ---
 
 # Long-Running Agent 会话

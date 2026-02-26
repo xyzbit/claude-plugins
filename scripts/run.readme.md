@@ -1,5 +1,6 @@
 
 ### autonomous 全自动脚本
+> ⚠️⚠️ ！默认是不限制循环次数直到开发完成，所以尽量定时检查，防止卡住浪费token
 
 `run.sh` 依赖已在 Claude Code 中安装的 `long-running-agent` 插件，
 每次迭代通过 `claude code` CLI 调用 `long-running-agent:start-session` skill 进行自动开发。
