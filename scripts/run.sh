@@ -2,20 +2,23 @@
 # =============================================================================
 # run.sh — Long-Running Agent 循环运行脚本
 #
-# 依赖：已在 Claude Code 中安装 long-running-agent 插件
-# 每次迭代调用 claude 并使用 long-running-agent:start-session skill
+# 每次迭代根据项目状态选择 Agent：
+#   - 无 feature_list.json → Initializer Agent（初始化项目）
+#   - 有 feature_list.json → Coding Agent（实现一个 feature 后退出）
 #
 # Usage:
-#   ./run.sh -d <project-dir> [-t "任务描述"][-n <max-iters>] [-s <delay>]
+#   ./run.sh -d <project-dir> -t "任务描述" [-n <max-iters>] [-s <delay>]
 #
 # Examples:
 #   ./run.sh -d ./my-project -t "构建一个 Todo 应用，支持增删改查"
-#   ./run.sh -d ./my-project -n 5
+#   ./run.sh -d ./my-project -t "继续开发" -n 5
 # =============================================================================
 
 set -euo pipefail
 
 # ── 常量 ─────────────────────────────────────────────────────────────────────
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+AGENT_DIR="${SCRIPT_DIR}/../long-running-agent/agents"
 DEFAULT_DELAY=3
 
 # ── 颜色 ─────────────────────────────────────────────────────────────────────
@@ -32,22 +35,20 @@ header() { echo -e "\n${BOLD}${CYAN}$*${RESET}"; }
 usage() {
   cat <<EOF
 ${BOLD}使用方式:${RESET}
-  $(basename "$0") -d <project-dir> [选项]
+  $(basename "$0") -d <project-dir> -t "任务描述" [选项]
 
 ${BOLD}必填参数:${RESET}
   -d <dir>      项目目录（不存在时自动创建）
-
-${BOLD}必填参数:${RESET}
   -t <task>     任务描述
 
+${BOLD}可选参数:${RESET}
   -n <iters>    最大迭代次数（默认: 0 = 无限制）
   -s <secs>     迭代间隔秒数（默认: ${DEFAULT_DELAY}）
   -h            显示此帮助
 
 ${BOLD}示例:${RESET}
   $(basename "$0") -d ./todo-app -t "构建 Todo 应用，支持增删改查和标签"
-  $(basename "$0") -d ./todo-app -n 5
-  $(basename "$0") -d ./todo-app   # 继续已有项目
+  $(basename "$0") -d ./todo-app -t "继续开发" -n 5
 EOF
   exit 1
 }
@@ -70,18 +71,25 @@ while getopts "d:t:m:n:s:h" opt; do
 done
 
 [[ -z "$PROJECT_DIR" ]] && { error "必须指定 -d <project-dir>"; usage; }
-[[ -z "$TASK" ]] && { error "必须指定 -t <task>"; usage; }
+[[ -z "$TASK" ]]        && { error "必须指定 -t <task>"; usage; }
 
 # ── 路径设置 ──────────────────────────────────────────────────────────────────
 mkdir -p "$PROJECT_DIR"
 PROJECT_DIR="$(realpath "$PROJECT_DIR")"
 cd "${PROJECT_DIR}"
 
+# ── 辅助：去除 .md 文件的 frontmatter（--- ... ---）─────────────────────────
+strip_frontmatter() {
+  local file="$1"
+  # 如果文件以 --- 开头，跳过到第二个 --- 之后的内容
+  awk 'BEGIN{fm=0} /^---/{fm++; if(fm==2){fm=-1}; next} fm==-1||fm==0{print}' "$file"
+}
+
 # ── 信号处理 ──────────────────────────────────────────────────────────────────
 handle_interrupt() {
   echo ""
   warn "收到中断信号，退出。"
-  warn "重新运行相同命令可继续：$(basename "$0") -d ${PROJECT_DIR}"
+  warn "重新运行相同命令可继续：$(basename "$0") -d ${PROJECT_DIR} -t \"${TASK}\""
   exit 0
 }
 trap handle_interrupt INT TERM
@@ -93,11 +101,20 @@ main() {
   header "══════════════════════════════════════════════════════"
   echo ""
   log "项目目录 : ${PROJECT_DIR}"
+  log "任务描述 : ${TASK}"
   [[ "${MAX_ITERATIONS}" -gt 0 ]] && log "最大迭代 : ${MAX_ITERATIONS}" || log "最大迭代 : 无限制"
-  [[ -n "${TASK}" ]] && log "任务描述 : ${TASK}"
   echo ""
 
+  local log_file="${PROJECT_DIR}/.agent.log"
   local iteration=0
+
+  # ── 搜索 feature_list.json（含子目录）─────────────────────────────────────
+  find_feature_list() {
+    # 优先当前目录，再搜索一层子目录
+    local f
+    f=$(find "${PROJECT_DIR}" -maxdepth 2 -name "feature_list.json" 2>/dev/null | head -1)
+    echo "${f}"
+  }
 
   while true; do
     iteration=$((iteration + 1))
@@ -107,34 +124,53 @@ main() {
       break
     fi
 
-    header "── 迭代 #${iteration} ──────────────────────────────────────────────────"
+    # ── 每次迭代重新查找 feature_list.json ───────────────────────────────────
+    local feature_list work_dir
+    feature_list="$(find_feature_list)"
+    if [[ -n "${feature_list}" ]]; then
+      work_dir="$(dirname "${feature_list}")"
+    else
+      work_dir="${PROJECT_DIR}"
+    fi
 
-    # 构建用户消息
-    local user_message="${TASK}"
-
-    echo "─────────────────────────────────────────────────────────────────────"
-
-    local log_file="${PROJECT_DIR}/.agent.log"
-    local full_message="${user_message}
-
-注意：一个开发任务完成后停止退出，当前是后台运行模式，每完成一个任务用户需要获取当前情况。"
-    echo "${full_message}" | claude --print --verbose \
-      --permission-mode bypassPermissions 2>&1 | tee -a "${log_file}"
-    # PIPESTATUS[0] 是 claude 的退出码，tee 不影响判断
-    [[ "${PIPESTATUS[0]}" -ne 0 ]] && warn "本次迭代遇到错误，继续下一轮..."
-
-    echo "─────────────────────────────────────────────────────────────────────"
-    success "迭代 #${iteration} 完成"
-    echo ""
-
-    # 检查是否所有功能完成
-    local feature_list="${PROJECT_DIR}/feature_list.json"
-    if [[ -f "${feature_list}" ]] && ! grep -q '"passes"[[:space:]]*:[[:space:]]*false' "${feature_list}"; then
+    # ── 检查是否所有功能已完成 ────────────────────────────────────────────
+    if [[ -n "${feature_list}" ]] && ! grep -q '"passes"[[:space:]]*:[[:space:]]*false' "${feature_list}"; then
       success "所有功能已实现，退出"
       break
     fi
 
-    # 下次迭代前等待
+    # ── 根据项目状态选择 Agent ────────────────────────────────────────────
+    local agent_type system_prompt user_message
+
+    if [[ -z "${feature_list}" ]]; then
+      agent_type="Initializer"
+      system_prompt="$(strip_frontmatter "${AGENT_DIR}/initializer.md")"
+      user_message="${TASK}"
+    else
+      agent_type="Coding"
+      system_prompt="$(strip_frontmatter "${AGENT_DIR}/coding.md")"
+      user_message="请从 feature_list.json 中选择下一个 passes:false 的功能进行开发，完成后 git commit 并更新 claude-progress.txt，然后退出。"
+      # 切换到 feature_list.json 所在目录，确保 coding agent 在正确目录工作
+      if [[ "${work_dir}" != "$(pwd)" ]]; then
+        log "检测到项目子目录: ${work_dir}，切换工作目录"
+        cd "${work_dir}"
+      fi
+    fi
+
+    header "── 迭代 #${iteration} [${agent_type} Agent] ──────────────────────────────"
+    echo "─────────────────────────────────────────────────────────────────────"
+
+    echo "${user_message}" | claude --print --verbose \
+      --permission-mode bypassPermissions \
+      --system-prompt "${system_prompt}" \
+      2>&1 | tee -a "${log_file}"
+    [[ "${PIPESTATUS[0]}" -ne 0 ]] && warn "本次迭代遇到错误，继续下一轮..."
+
+    echo "─────────────────────────────────────────────────────────────────────"
+    success "迭代 #${iteration} [${agent_type}] 完成"
+    echo ""
+
+    # ── 下次迭代前等待 ────────────────────────────────────────────────────
     if [[ "${MAX_ITERATIONS}" -eq 0 ]] || [[ "${iteration}" -lt "${MAX_ITERATIONS}" ]]; then
       echo -n "  ${DELAY}s 后自动继续"
       for ((i=DELAY; i>0; i--)); do
