@@ -9,7 +9,7 @@
 ~/.claude/plugins/long-running-agent/templates/
 后端（如果有）拷贝 backend/ 目录结构，创建一个完整的项目结构。
 前端（如果有）拷贝 frontend/ 目录结构，创建一个完整的项目结构。
-根据初始提示词（需求）编写 Readme.md
+注意：根据初始提示词（需求）替换实际包名称，编写 Readme.md。
 保证前后端能够正常启动
 
 ### 1. 创建功能清单 (feature_list.json)
