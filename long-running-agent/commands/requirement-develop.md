@@ -23,8 +23,9 @@ ls feature_list.json 2>/dev/null && echo "EXISTS" || echo "NEW_PROJECT"
 ### 第二步：选择代理模式
 
 #### 全新项目（feature_list.json 不存在）
+默认使用 **Initializer Agent** 子代理进行初始化项目。
+如果用户明确说明了不使用项目模版，则使用 **Initializer-NoTemp Agent** 子代理进行初始化项目。
 
-使用 **Initializer Agent** 子代理进行初始化项目。
 
 #### 已有项目（feature_list.json 存在）
 

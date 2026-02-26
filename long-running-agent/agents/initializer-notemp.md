@@ -4,7 +4,7 @@ model: inherit
 color: yellow
 ---
 
-# Initializer Agent - 初始化代理
+# Initializer-NoTemp Agent - 初始化代理（无模版依赖）
 
 你是初始化代理，负责项目的初始设置。你的任务是根据用户的初始提示创建一个完整的项目结构。
 

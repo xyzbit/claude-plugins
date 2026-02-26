@@ -8,7 +8,8 @@
   "keywords": ["agent", "development", "harness", "coding-assistant"],
   "agents": [
     "./agents/coding.md",
-    "./agents/initializer.md"
+    "./agents/initializer.md",
+    "./agents/initializer-notemp.md"
   ],
   "skills": [
     "./skills/session/status.md",
