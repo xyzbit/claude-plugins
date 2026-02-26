@@ -108,7 +108,7 @@ main() {
     header "── 迭代 #${iteration} ──────────────────────────────────────────────────"
 
     # 构建用户消息
-    local user_message="使用 long-running-agent:start-session skill 在 ${PROJECT_DIR} 目录中进行开发。"
+    local user_message="使用 long-running-agent:start skill 在 ${PROJECT_DIR} 目录中进行开发。"
     [[ -n "${TASK}" ]] && user_message="${user_message}
 任务描述：${TASK}"
 

@@ -1,7 +1,7 @@
 {
   "name": "long-running-agent",
   "description": "基于 Anthropic 论文的双轨 Agent 系统，用于指导 AI Agent 进行增量开发",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "author": {
     "name": "Long Running Agent Team"
   },
@@ -11,12 +11,12 @@
     "./agents/initializer.md"
   ],
   "skills": [
-    "./skills/long-runnging-develop/SKILL.md"
+    "./skills/session/status.md",
+    "./skills/session/complete.md",
+    "./skills/session/commit.md",
+    "./skills/test/run.md"
   ],
   "commands": [
-    "./commands/session/commit.md",
-    "./commands/session/complete.md",
-    "./commands/session/status.md",
-    "./commands/test/run.md"
+    "./commands/requirement-develop.md"
   ]
 }
