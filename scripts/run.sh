@@ -115,7 +115,10 @@ main() {
     echo "─────────────────────────────────────────────────────────────────────"
 
     local log_file="${PROJECT_DIR}/.agent.log"
-    echo "${user_message}" | claude --print --verbose \
+    local full_message="${user_message}
+
+注意：一个开发任务完成后停止退出，当前是后台运行模式，每完成一个任务用户需要获取当前情况。"
+    echo "${full_message}" | claude --print --verbose \
       --permission-mode bypassPermissions 2>&1 | tee -a "${log_file}"
     # PIPESTATUS[0] 是 claude 的退出码，tee 不影响判断
     [[ "${PIPESTATUS[0]}" -ne 0 ]] && warn "本次迭代遇到错误，继续下一轮..."
