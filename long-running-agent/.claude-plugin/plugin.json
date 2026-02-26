@@ -11,13 +11,9 @@
     "./agents/initializer.md"
   ],
   "skills": [
-    "./skills/start-session/SKILL.md"
+    "./skills/long-runnging-develop/SKILL.md"
   ],
   "commands": [
-    "./commands/build/backend.md",
-    "./commands/build/frontend.md",
-    "./commands/dev-server/start.md",
-    "./commands/dev-server/stop.md",
     "./commands/session/commit.md",
     "./commands/session/complete.md",
     "./commands/session/status.md",
