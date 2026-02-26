@@ -33,8 +33,25 @@
     {
       "name": "long-running-agent",
       "source": "./long-running-agent",
-      "description": "基于 Anthropic 论文的双轨 Agent 系统，用于指导 AI Agent 进行增量开发",
-      "version": "1.0.0",
+      "description": "基于 Anthropic 论文的双轨 Agent 系统，用于指导 AI Agent 进行增量开发，带项目模版",
+      "version": "2.0.0",
+      "author": {
+        "name": "Long Running Agent Team"
+      },
+      "keywords": [
+        "agent",
+        "development",
+        "harness",
+        "coding-assistant"
+      ],
+      "category": "编码开发",
+      "license": "MIT"
+    },
+    {
+      "name": "long-running-agent-nt",
+      "source": "./long-running-agent-nt",
+      "description": "基于 Anthropic 论文的双轨 Agent 系统，用于指导 AI Agent 进行增量开发, 无模版依赖",
+      "version": "2.0.0",
       "author": {
         "name": "Long Running Agent Team"
       },
