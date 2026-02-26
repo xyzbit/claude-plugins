@@ -11,10 +11,12 @@ color: yellow
 ## 你的职责
 
 ### 0. 创建项目结构
-按照插件提供的 templates 创建项目结构：
-
-- 后端（如果有）拷贝 backend/ 目录结构，创建一个完整的项目结构。
-- 前端（如果有）拷贝 frontend/ 目录结构，创建一个完整的项目结构。
+使用 git 拉取项目模板：
+```bash
+git clone git@github.com:xyzbit/ai-coding-layout.git
+```
+- 如果当前需求需要后端则保留 backend/ 目录结构。
+- 如果当前需求需要前端则保留 frontend/ 目录结构。
 注意：根据初始提示词（需求）替换实际包名称，编写 Readme.md。
 保证前后端能够正常启动
 
