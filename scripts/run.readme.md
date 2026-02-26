@@ -1,17 +1,17 @@
 
 ### autonomous 全自动脚本
 
-`run.sh` 是一个可直接运行的 shell 脚本，参考 [Anthropic autonomous-coding](https://github.com/anthropics/claude-quickstarts/tree/main/autonomous-coding) 范式，
-结合本插件的双轨 Agent 架构，通过 `claude code` CLI 实现全自动循环开发。
+`run.sh` 依赖已在 Claude Code 中安装的 `long-running-agent` 插件，
+每次迭代通过 `claude code` CLI 调用 `long-running-agent:start-session` skill 进行自动开发。
 
 ```bash
-# 初始化新项目（自动创建目录，运行 Initializer → Coding 循环）
+# 初始化新项目
 ./run.sh -d ./my-app -t "构建 Todo 应用，支持增删改查和标签分类"
 
-# 指定模型和最大迭代次数
-./run.sh -d ./my-app -t "构建 Todo 应用" -m claude-opus-4-5 -n 10
+# 限制最大迭代次数
+./run.sh -d ./my-app -t "构建 Todo 应用" -n 5
 
-# 继续已有项目（自动跳过初始化）
+# 继续已有项目
 ./run.sh -d ./my-app
 
 # 查看帮助
@@ -22,7 +22,7 @@
 | 参数 | 说明 | 默认值 |
 |------|------|--------|
 | `-d <dir>` | 项目目录（必填） | — |
-| `-t <task>` | 任务描述（新项目必填） | — |
+| `-t <task>` | 任务描述（新项目建议填写） | — |
 | `-m <model>` | 使用的模型 | `claude-sonnet-4-5` |
 | `-n <iters>` | 最大迭代次数（0 = 无限制） | `0` |
 | `-s <secs>` | 迭代间隔秒数 | `3` |
@@ -31,11 +31,8 @@
 ```
 run.sh 启动
   │
-  ├─ 全新项目？ → Initializer Agent（读取 initializer.md）
-  │               创建 feature_list.json / init.sh / claude-progress.txt / git init
-  │
-  └─ 循环迭代 → Coding Agent（读取 coding.md）
-                 选一个 passes:false 的功能 → 实现 → 验证 → git commit → 更新进度
+  └─ 循环迭代 → claude --print 调用 long-running-agent:start-session skill
+                 skill 内部自动判断：全新项目 → 初始化 / 已有项目 → 增量开发
                  直到所有功能 passes:true 或达到最大迭代次数
 ```
 
