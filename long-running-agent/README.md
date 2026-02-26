@@ -35,7 +35,7 @@ long-running-agent/
 ```
 
 Agent 会自动：
-1. **判断项目状态**：检查 `workspace/feature_list.json` 是否存在
+1. **判断项目状态**：检查 `{project_name}/feature_list.json` 是否存在
 2. **选择代理模式**：
    - 全新项目 → **Initializer Agent**：初始化完整项目结构
    - 已有项目 → **Coding Agent**：继续增量开发
@@ -83,6 +83,6 @@ Agent 会自动：
 
 | 文件 | 说明 |
 |------|------|
-| `workspace/feature_list.json` | 功能清单，记录所有待实现功能及完成状态 |
-| `workspace/claude-progress.txt` | 进度日志，记录当前状态和下一步计划 |
-| `workspace/init.sh` | 启动脚本，用于启动开发服务器 |
+| `{project_name}/feature_list.json` | 功能清单，记录所有待实现功能及完成状态 |
+| `{project_name}/claude-progress.txt` | 进度日志，记录当前状态和下一步计划 |
+| `{project_name}/init.sh` | 启动脚本，用于启动开发服务器 |
