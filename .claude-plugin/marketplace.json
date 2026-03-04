@@ -33,7 +33,7 @@
     {
       "name": "long-running-agent",
       "source": "./long-running-agent",
-      "description": "基于 Anthropic 论文的双轨 Agent 系统，用于指导 AI Agent 进行增量开发，带项目模版",
+      "description": "适合一次性开发场景，从 0 到 1 快速初始化并跑通项目 MVP 版本，基于 Anthropic 论文的双轨 Agent 系统",
       "version": "2.0.0",
       "author": {
         "name": "Long Running Agent Team"
@@ -42,7 +42,28 @@
         "agent",
         "development",
         "harness",
-        "coding-assistant"
+        "coding-assistant",
+        "mvp",
+        "bootstrap"
+      ],
+      "category": "编码开发",
+      "license": "MIT"
+    },
+    {
+      "name": "dev-enegine",
+      "source": "./dev-enegine",
+      "description": "通用开发引擎，适配各种类型项目的需求开发，支持长时间低开销的高效持续运行",
+      "version": "3.2.0",
+      "author": {
+        "name": "Long Running Agent Team"
+      },
+      "keywords": [
+        "agent",
+        "development",
+        "engine",
+        "coding-assistant",
+        "long-running",
+        "efficient"
       ],
       "category": "编码开发",
       "license": "MIT"
