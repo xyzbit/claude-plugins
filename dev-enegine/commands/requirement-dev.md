@@ -40,7 +40,7 @@ cat .dev-enegine/requirements/manifest.json
 
 | 状态 | 说明 | 操作 |
 |------|------|------|
-| 不存在 | 未匹配到已有需求 | 创建需求目录和 feature_list.json，状态置为 `planning`，进入规划 |
+| 不存在 | 未匹配到已有需求 | 创建需求目录，向 manifest.json 添加条目 `{ "dir": "<目录名>", "name": "<需求简称>", "status": "planning" }`，进入规划 |
 | `planning` | 规划未完成 | 调用 `Planner Agent`，用户确认后状态改为 `developing`，进入`开发循环` |
 | `developing` | 规划已完成 | 直接进入`开发循环` |
 | `completed` | 全部完成 | 展示完成摘要，询问是否继续新需求 |

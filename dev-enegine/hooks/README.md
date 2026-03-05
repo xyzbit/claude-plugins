@@ -134,7 +134,7 @@ mkdir -p "$PROJECT_ROOT/.dev-enegine/requirements/req-001"
 cat > "$PROJECT_ROOT/.dev-enegine/requirements/manifest.json" <<'EOF'
 {
   "requirements": [
-    { "dir": "req-001", "status": "developing" }
+    { "dir": "req-001", "name": "用户认证", "status": "developing" }
   ]
 }
 EOF

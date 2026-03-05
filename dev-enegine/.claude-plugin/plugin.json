@@ -1,5 +1,5 @@
 {
-  "name": "long-running-agent",
+  "name": "dev-enegine",
   "description": "基于 Anthropic 论文的多 Agent 协作系统，支持需求规划→编码→测试的全流程自动化增量开发，通过原生 Hooks 实现自动化副作用处理",
   "version": "3.2.0",
   "author": {
@@ -15,7 +15,6 @@
   "commands": [
     "./commands/project-init.md",
     "./commands/requirement-dev.md",
-    "./commands/config.md",
-    "./commands/hud-setup.md"
+    "./commands/config.md"
   ]
 }

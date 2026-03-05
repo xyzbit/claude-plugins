@@ -19,9 +19,30 @@ color: blue
 
 深入探索项目代码结构、技术栈、已有功能（`.dev-enegine/claude-progress.txt`）和需求历史（`.dev-enegine/requirements/manifest.json`），理解可复用的模块和约束。
 
-### 2. 编写需求文档 (requirement.md)
+### 2. 需求初始化
 
-在需求目录下创建，包含：需求背景、功能范围、用户场景、验收标准。
+在需求目录下创建 `requirement.md`，包含：需求背景、功能范围、用户场景、验收标准。
+
+同时更新 `.dev-enegine/requirements/manifest.json` 需求索引，在 `requirements` 数组中添加该需求的条目：
+
+```json
+{
+  "requirements": [
+    {
+      "dir": "req-001",
+      "name": "需求简称",
+      "description": "需求简述",
+      "status": "planning"
+    }
+  ]
+}
+```
+
+字段说明：
+- `dir`（必须）：需求目录名，与 `.dev-enegine/requirements/<dir>/` 对应
+- `name`（必须）：需求简称，用于 HUD 展示（建议 ≤20 字符）
+- `description`（可选）：需求的详细摘要
+- `status`（必须）：`planning` | `developing` | `completed` | `blocked`
 
 ### 3. 编写技术方案 (tech-design.md)
 

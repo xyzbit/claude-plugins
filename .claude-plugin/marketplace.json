@@ -69,6 +69,14 @@
       "license": "MIT"
     },
     {
+      "name": "claude-hud",
+      "version": "0.1.0",
+      "source": "./claude-hud",
+      "description": "Real-time statusline showing context usage, active tools, running agents, and todo progress. Always visible below your input, zero config required.",
+      "category": "monitoring",
+      "tags": ["hud", "statusline", "monitoring", "context", "tools", "agents", "todos"]
+    },
+    {
       "name": "architect-collaboration",
       "source": "./architect-collaboration",
       "description": "高级架构师协作工作流插件，通过需求分析、技术设计、任务分解、功能开发四阶段结构化引导开发流程",
