@@ -110,6 +110,7 @@
 按需安装
 ```bash
 /plugins install dev-enegine
+/plugins install claude-hud
 /plugins install long-running-agent
 /plugins install content-create
 ```

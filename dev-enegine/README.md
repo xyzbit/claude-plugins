@@ -54,9 +54,10 @@ dev-enegine/
 ```
 
 ### 4. HUD 可视化（可选）
+可以在 Claude 底部栏，看到项目进度、需求状态、功能进度等实时信息
 
 ```
-/hud-setup                       # 安装/更新 HUD
+/plugins install claude-hud    # 安装/更新 HUD
 ```
 
 ## 人工控制等级
@@ -190,3 +191,5 @@ Coder 完成时自动解析输出结果：
 | `auto_commit` | `true` | Coder Agent 是否在实现后自动 commit |
 | `parallel_features` | `false` | 是否并行开发无依赖的 features |
 | `template_repo` | github 地址 | 项目模板仓库 |
+
+// TODO: 添加 Analysis Agent 用于需求分析、澄清，保证更加可控
