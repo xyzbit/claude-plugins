@@ -1,0 +1,20 @@
+{
+  "name": "vibe-motion",
+  "version": "0.1.0",
+  "description": "Create product-level promotional videos and animations using vibe-motion (Remotion). Provides structured guidance for building landing page media, mockups, and promotional videos with 1:1 realistic UI recreation.",
+  "author": {
+    "name": "xiaoyan",
+    "email": "1425895909@qq.com"
+  },
+  "keywords": [
+    "animation",
+    "video",
+    "promo",
+    "remotion",
+    "vibe-motion",
+    "landing-page",
+    "product-video"
+  ],
+  "categories": ["animation", "video-production", "marketing"],
+  "license": "MIT"
+}
