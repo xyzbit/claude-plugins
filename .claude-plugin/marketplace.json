@@ -77,6 +77,27 @@
       "tags": ["hud", "statusline", "monitoring", "context", "tools", "agents", "todos"]
     },
     {
+      "name": "vibe-motion",
+      "source": "./vibe-motion",
+      "description": "使用 vibe-motion (Remotion) 创建产品级宣传视频与动效，支持 1:1 真实 UI 还原与流畅交互动画",
+      "version": "0.1.0",
+      "author": {
+        "name": "xiaoyan",
+        "email": "1425895909@qq.com"
+      },
+      "keywords": [
+        "animation",
+        "video",
+        "promo",
+        "remotion",
+        "vibe-motion",
+        "landing-page",
+        "product-video"
+      ],
+      "category": "视频动效",
+      "license": "MIT"
+    },
+    {
       "name": "architect-collaboration",
       "source": "./architect-collaboration",
       "description": "高级架构师协作工作流插件，通过需求分析、技术设计、任务分解、功能开发四阶段结构化引导开发流程",
