@@ -1,0 +1,23 @@
+{
+  "skill_name": "loading-page-design",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "Create a loading page for my startup's landing page. I want a full-screen loader with a spinning animation and our company logo placeholder. The brand color is purple (#6b5ce7).",
+      "expected_output": "Full HTML page with centered spinner animation, purple brand color, smooth transitions, and proper accessibility attributes",
+      "files": []
+    },
+    {
+      "id": 2,
+      "prompt": "I need a skeleton loading screen for a product listing page with card-based layout. Show placeholder rectangles for product images, titles, and prices. Use a subtle shimmer animation.",
+      "expected_output": "HTML/CSS skeleton screen with rounded rectangle placeholders, shimmer animation, and responsive grid layout",
+      "files": []
+    },
+    {
+      "id": 3,
+      "prompt": "Design a multi-step progress indicator for an onboarding flow with 4 steps: Account, Preferences, Profile, and Complete. Make the current step highlighted in blue.",
+      "expected_output": "Step progress bar HTML with 4 labeled steps, visual progress fill, active/completed states, and step highlighting",
+      "files": []
+    }
+  ]
+}
